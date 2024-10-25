@@ -1,0 +1,58 @@
+@import '../../styles.scss'; // importo variables de colores
+
+
+table{
+    width: 100% !important;
+    border: 1px solid $secondary-color;
+}
+
+thead tr th{
+    background-color: $secondary-color !important;
+    font-size: 16px;
+    color: $secondary-font-color;
+
+    &:first-child{
+        padding-left: 20px;
+    }    
+}
+
+tbody tr{
+    max-height: 100px !important;
+
+    & td{
+        height: 100% !important;
+        vertical-align: middle;
+    
+        & img{
+            height: 90px;
+            width: 90px;
+        }
+    }
+}
+
+// ---- Para articulos de "oferta"
+.clearence td{
+    background-color: $other-color !important;
+}
+
+
+.optionsContainer{
+    & button{
+        border: none;
+        background-color: $secondary-color;
+        width: 30px;
+    }
+
+    & button:hover{
+        background-color: $secondary-font-color;
+        color: $font-color;
+    }
+
+    & input{
+        border: none;
+        padding: 5px 8px;
+        width: 50px;
+        border-radius: 5px;
+    }
+    
+}
