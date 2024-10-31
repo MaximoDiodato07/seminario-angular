@@ -1,0 +1,5 @@
+<div class="d-flex justify-content-center optionsContainer">
+    <button class="btn btn-sm fw-bolder fs-5 me-1" (click)="downQuantity()"> - </button>
+    <input type="number" [(ngModel)]="quantity" (change)="onChange($event)">
+    <button class="btn btn-sm fw-bolder fs-5 ms-1" (click)="upQuantity()"> + </button>
+</div>

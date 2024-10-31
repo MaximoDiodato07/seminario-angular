@@ -1,17 +1,21 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common'; // para importar el modulo CommonModule
 import { Beer } from './beer';
-import { FormsModule } from '@angular/forms';
+import { InputNumberComponent } from "../input-number/input-number.component"; // Importamos componente que agrega boton de stock.
+import { BeerCartService } from '../beer-cart.service'; // Importo el servicio
 
 @Component({
   selector: 'app-beer-list',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, InputNumberComponent],
   templateUrl: './beer-list.component.html',
   styleUrl: './beer-list.component.scss'
 })
 
 export class BeerListComponent{
+  
+  // constuctor
+  constructor(private cart: BeerCartService) { } // <-- LLamo a los datos del servicio.
 
   // Lista de cerveza
     beers: Beer[] = [
@@ -43,37 +47,14 @@ export class BeerListComponent{
         quantity: 0
       }
     ]
-
-
-    //-------- Metodos del componente --------
+  
+    // Añado el carrito.
+    addToCart(beer: Beer):void{
+      this.cart.addToCart(beer);  //<-- LLamamos al metodo addToCart del servicio beer-cart.service.ts
+      beer.stock -= beer.quantity; //<-- Le saco al stock, la cantidad pedida
+      beer.quantity = 0; //<--- Reinicio a 0, para su posible siguiente compra.
+    }
     
-    // Metodo para subir el stock de una cerveza
-      upQuantity(beer: Beer):void{
-        if(beer.stock - beer.quantity > 0){
-          beer.quantity++;
-        }else{
-          alert('No puedes comprar más de este producto');
-        }
-       
-      }
-    
-    // Metodo para bajar el stock de una cerveza
-      downQuantity(beer: Beer):void{
-        if(beer.quantity <= 0){
-          alert('Operacion invalida');        
-        }else{
-          beer.quantity--;
-        }
-      }
-
-      // Metodo que verifica el stock de una cerveza
-      onChange(event: any, beer: Beer):void{
-        if(beer.quantity > beer.stock){
-          event.preventDefault();
-          event.target.value = 0;
-          alert('No puedes comprar más de este producto');
-        }
-      }
 
 
 }

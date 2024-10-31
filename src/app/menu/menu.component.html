@@ -1,5 +1,10 @@
 <nav class="navbar bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand"> <img [src]="logo" alt=""> </a>
-    </div>
+  <div class="container-fluid">
+      <a class="navbar-brand" [routerLink]="['/beers']">
+          <img [src]="logo" alt="Logo">
+      </a>
+      <a [routerLink]="['/about']" routerLinkActive="router-link-active" class="navbarLink fw-bolder"> 
+          Sobre Nosotros!
+      </a>
+  </div>
 </nav>

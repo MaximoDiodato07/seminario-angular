@@ -1,7 +1,9 @@
+
 #mainContainer{
-    width: 100% !important;
-    height: 80% !important;
-    box-sizing: border-box;
+    min-height: 100dvh;
+    width: 100%;
+    // dividir, el contenido de la pagina en 3 columnas:
+    // el menu, el contenido y el footer
+    display: grid;
+    grid-template-rows: auto 1fr auto;  
 }
-
-

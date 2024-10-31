@@ -1,0 +1,22 @@
+@import '../../styles.scss'; // importo variables de colores
+
+.optionsContainer{
+    & button{
+        border: none;
+        background-color: $secondary-color;
+        width: 30px;
+    }
+
+    & button:hover{
+        background-color: $secondary-font-color;
+        color: $font-color;
+    }
+
+    & input{
+        border: none;
+        padding: 5px 8px;
+        width: 50px;
+        border-radius: 5px;
+    }
+    
+}

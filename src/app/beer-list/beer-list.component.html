@@ -1,4 +1,4 @@
-<table class="table table-responsive  ">
+<table class="table table-responsive table-borderless">
     <thead>
         <tr>
             <th>Imagen</th>
@@ -15,29 +15,37 @@
         @for (beer of beers; track $index) {
             <tr [ngClass]="{'clearence' : beer.clearence}"> 
                 <td class="col-2"><img [src]="beer.image" alt="Imagen de la cerveza" class="img-thumbnail"/></td>
-                <td class="col-3">{{beer.name}}</td>
+                <td class="col-2">{{beer.name}}</td>
                 <td class="col-2">{{beer.type}}</td>
                 <td class="col-2">
                     <!-- Le establezco una "pipe" -> " | " para darle formato. -->
                     <!-- Por defecto, currency trae "$" antes del numero, y le agrega 2 decimales --> 
                     {{beer.price | currency}} 
                 </td>
-                <td class="col-1 text-end">
+                <td class="col-1">
                     <!-- Como son condiciones "Opuestas", solo va a mostrar 1 de los 2 "span" -->
                     @if(beer.stock <= 0){
-                        <span class="fw-medium text-secondary"> Sin stock </span>  
+                        <span class="sign"> Sin stock </span>  
                     }@else{
                         <span> {{beer.stock}} </span>	
                     }
                 </td>
-                <td class="col-2">
-                    @if(beer.stock > 0){
-                        <div class="d-flex justify-content-center optionsContainer">
-                            <button class="btn btn-sm fw-bolder fs-5 me-1" (click)="downQuantity(beer)"> - </button>
-                            <input type="number" [(ngModel)]="beer.quantity" (change)="onChange($event, beer)">
-                            <button class="btn btn-sm fw-bolder fs-5 ms-1" (click)="upQuantity(beer)"> + </button>
-                        </div>
-                    }
+                <td class="col-3">
+                    <div class="d-flex justify-content-center">
+                        <!-- Se mostrara solo en caso de stock -->
+                        @if(beer.stock > 0){ 
+                            <!-- A la variable hija "quantity" le asigno el valor de la variable padre -->
+                            <app-input-number [(quantity)]= "beer.quantity" [max]="beer.stock"></app-input-number>    
+                            <!-- Boton de agregar al carrito -->
+                            <button class="cartBtn ms-2" (click)="addToCart(beer)">  
+                                <svg width="22px" height="22px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#FFFFFF">
+                                    <path d="M3 6H22L19 16H6L3 6ZM3 6L2.25 3.5" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M9.99219 11H11.9922M13.9922 11H11.9922M11.9922 11V9M11.9922 11V13" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M11 19.5C11 20.3284 10.3284 21 9.5 21C8.67157 21 8 20.3284 8 19.5" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M17 19.5C17 20.3284 16.3284 21 15.5 21C14.6716 21 14 20.3284 14 19.5" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </button> 
+                        }
+                    </div> 
                 </td>
             </tr>
         }
