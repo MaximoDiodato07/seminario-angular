@@ -51,6 +51,7 @@ export class InputNumberComponent {
         event.target.value = 0;
         alert('No puedes comprar más de este producto');
       }else{
+
         this.quantityChange.emit(this.quantity);
       }
     }

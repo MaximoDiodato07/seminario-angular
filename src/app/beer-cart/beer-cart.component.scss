@@ -1,0 +1,33 @@
+@import "../../styles.scss";
+
+#beerCartContainer{
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $menu-color;
+    padding: 30px;
+}
+
+.cartItems, .cartHeader{
+    list-style: none;
+    color: $secondary-color;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cartHeader{
+    border-bottom: 1px solid $secondary-color;
+    margin-bottom: 5px;
+}
+
+.cartItems{
+    & .cartName{
+        width: 85%;
+    }
+
+    & .cartQuantity{
+        width: 15%;
+    }
+}
+

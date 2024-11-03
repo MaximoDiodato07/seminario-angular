@@ -1,1 +1,10 @@
-<p>beer-cart works!</p>
+<div id="beerCartContainer" class="d-flex flex-column align-items-center pt-5">
+  <div class="cartHeader fw-bolder">
+    <p class="cartName"> Productos: </p>
+    <p class="cartQuantity"> Cantidad: </p>
+  </div>  
+  <div class="cartItems" *ngFor="let item of (cartList$ | async); let i = index">
+   <p class="cartName"> {{ item.name }}: </p>
+   <p class="cartQuantity"> {{ item.quantity }}</p>       
+  </div>
+</div>

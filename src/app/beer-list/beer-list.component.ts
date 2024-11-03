@@ -13,40 +13,41 @@ import { BeerCartService } from '../beer-cart.service'; // Importo el servicio
 })
 
 export class BeerListComponent{
-  
-  // constuctor
-  constructor(private cart: BeerCartService) { } // <-- LLamo a los datos del servicio.
 
+
+  // constuctor
+  constructor(private cart: BeerCartService){   // <-- LLamo a los datos del servicio con Inyeccion de dependencia.
+  }
   // Lista de cerveza
-    beers: Beer[] = [
-      {
-        name: 'Lager',
-        type: 'beer',
-        price: 5,
-        stock: 10,
-        image: 'assets/img/beers/lager.jpg',
-        clearence: true,
-        quantity: 0
-      },
-      {
-        name: 'Pilsner',
-        type: 'beer',
-        price: 5,
-        stock: 0,
-        image: 'assets/img/beers/pilsner.jpg',
-        clearence: false,
-        quantity: 0
-      },
-      {
-        name: 'Pale Ale',
-        type: 'beer',
-        price: 5,
-        stock: 10,
-        image: 'assets/img/beers/pale-ale.jpg',
-        clearence: false,
-        quantity: 0
-      }
-    ]
+  beers: Beer[] = [
+    {
+      name: 'Lager',
+      type: 'lager',
+      price: 5,
+      stock: Math.floor(Math.random() * 20), // Número aleatorio entre 0 y 19
+      image: 'assets/img/beers/lager.jpg',
+      clearence: true,
+      quantity: 0
+    },
+    {
+      name: 'Pilsner',
+      type: 'pilsner',
+      price: 6,
+      stock: Math.floor(Math.random() * 20),
+      image: 'assets/img/beers/pilsner.jpg',
+      clearence: false,
+      quantity: 0
+    },
+    {
+      name: 'Pale Ale',
+      type: 'ale',
+      price: 7,
+      stock: Math.floor(Math.random() * 20),
+      image: 'assets/img/beers/pale-ale.jpg',
+      clearence: false,
+      quantity: 0
+    }
+  ];
   
     // Añado el carrito.
     addToCart(beer: Beer):void{

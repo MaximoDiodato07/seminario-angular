@@ -1,0 +1,17 @@
+@import "../../styles.scss";
+
+#mainContainer{
+    width: 100%;
+    height: 100%;
+}
+
+#beerCartContainer{
+    margin: 0;
+    padding: 0;
+}
+
+#beerListContainer{
+    padding: 0 30px;
+    border: 2px solid $secondary-color;
+    background-color: $primary-color;
+}

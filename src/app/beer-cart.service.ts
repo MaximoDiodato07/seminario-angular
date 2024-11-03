@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Beer } from './beer-list/beer'; // <--- Importo la lista de cervezas.
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,8 @@ import { Beer } from './beer-list/beer'; // <--- Importo la lista de cervezas.
 // Este servicio manejara la logica del carrito.
 export class BeerCartService {
   // Variables
-  cartList: Beer[] = []; // <--- Lista de cervezas del carrito.
+  private _cartList: Beer[] = []; // <--- Lista de cervezas del servicio.
+  cartList: BehaviorSubject<Beer[]> = new BehaviorSubject<Beer[]>(this._cartList); // <--- Lista de cervezas del carrito.
   
   // Constructor
   constructor() { }
@@ -23,21 +25,21 @@ export class BeerCartService {
     }
 
     // Genero cerveza a analizar por nombre, porque no tienen id.
-    let item: Beer | undefined = this.cartList.find((cartElement) => cartElement.name == beer.name);
-
-    
+    let item: Beer | undefined = this._cartList.find((cartElement) => cartElement.name == beer.name);
+  
     if(!item){ // si no existe, la agrego
-      this.cartList.push({ ... beer }); // <--- Agrego cerveza al carrito.  
+      this._cartList.push({ ... beer }); // <--- Agrego cerveza al carrito.  
     } else{
-       item.quantity += beer.quantity // <-- al objeto que ya existia, le agrego la cantidad.
+       item.quantity += beer.quantity // <-- al objeto que ya existia, le agrego la cantidad.  
     }
 
+    this.cartList.next(this._cartList); // <-- Cambio el valor de la variable global/reactiva.
   }
 
   // Eliminar cerveza al carrito
   deleteOfCart(beer: Beer) {
     // Busco dentro del carrito, y creo un nuevo array donde no se incluya la cerveza.
-    this.cartList = this.cartList.filter(item => item !== beer);    
+    this._cartList = this._cartList.filter(item => item !== beer);    
   }
 
 }
