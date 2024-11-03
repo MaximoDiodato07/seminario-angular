@@ -1,9 +1,11 @@
 export interface Beer {
     name: string;
-    type: string;
-    price: number;
-    stock: number;
+    rating: {
+        average: number // es un subcampo
+      },
+    price: string;
     image: string;
-    clearence: boolean;
-    quantity: number;
+    //A partir de aca, se agregan datos por fuera de la consulta, que se manejaran desde el front.
+    stock: number; 
+    quantity: number; 
 }

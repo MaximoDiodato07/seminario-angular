@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common'; // para importar el modulo Commo
 import { Beer } from './beer';
 import { InputNumberComponent } from "../input-number/input-number.component"; // Importamos componente que agrega boton de stock.
 import { BeerCartService } from '../beer-cart.service'; // Importo el servicio
+import { BeerDataService } from '../beer-data.service'; // Importo el servicio
 
 @Component({
   selector: 'app-beer-list',
@@ -13,48 +14,37 @@ import { BeerCartService } from '../beer-cart.service'; // Importo el servicio
 })
 
 export class BeerListComponent{
-
+  // Variables
+  beers: Beer[] = [];
 
   // constuctor
-  constructor(private cart: BeerCartService){   // <-- LLamo a los datos del servicio con Inyeccion de dependencia.
+  constructor(private cart: BeerCartService, private beersService: BeerDataService){   // <-- LLamo a los datos del servicio con Inyeccion de dependencia.
   }
-  // Lista de cerveza
-  beers: Beer[] = [
-    {
-      name: 'Lager',
-      type: 'lager',
-      price: 5,
-      stock: Math.floor(Math.random() * 20), // Número aleatorio entre 0 y 19
-      image: 'assets/img/beers/lager.jpg',
-      clearence: true,
-      quantity: 0
-    },
-    {
-      name: 'Pilsner',
-      type: 'pilsner',
-      price: 6,
-      stock: Math.floor(Math.random() * 20),
-      image: 'assets/img/beers/pilsner.jpg',
-      clearence: false,
-      quantity: 0
-    },
-    {
-      name: 'Pale Ale',
-      type: 'ale',
-      price: 7,
-      stock: Math.floor(Math.random() * 20),
-      image: 'assets/img/beers/pale-ale.jpg',
-      clearence: false,
-      quantity: 0
-    }
-  ];
+
+  ngOnInit(): void {
+    this.beersService.getBeers() // <--- Llamamos al método getBeers del servicio beer-data.service.ts
+     .subscribe(beers => this.beers = beers); // <--- Suscribo a mi variable local, lo traido desde el servicio
+  }
   
-    // Añado el carrito.
-    addToCart(beer: Beer):void{
-      this.cart.addToCart(beer);  //<-- LLamamos al metodo addToCart del servicio beer-cart.service.ts
-      beer.stock -= beer.quantity; //<-- Le saco al stock, la cantidad pedida
-      beer.quantity = 0; //<--- Reinicio a 0, para su posible siguiente compra.
-    }
+  
+    
+    // {
+    //   name: 'Lager',
+    //   rating: [],
+    //   price: 5,
+    //   image: 'assets/img/beers/lager.jpg',
+    //   stock: ,   // Número aleatorio entre 0 y 19
+    //   quantity: 0,
+    //   ,
+    // },
+  
+  
+  // Añado el carrito.
+  addToCart(beer: Beer):void{
+    this.cart.addToCart(beer);  //<-- LLamamos al metodo addToCart del servicio beer-cart.service.ts
+    beer.stock -= beer.quantity; //<-- Le saco al stock, la cantidad pedida
+    beer.quantity = 0; //<--- Reinicio a 0, para su posible siguiente compra.
+  }
     
 
 

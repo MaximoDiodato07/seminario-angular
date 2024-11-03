@@ -3,7 +3,7 @@
         <tr>
             <th>Imagen</th>
             <th>Nombre</th>
-            <th>Tipo</th>
+            <th class="text-center">Puntuacion</th>
             <th>Precio</th>
             <th>Stock</th>
             <th class="text-center"> Comprar </th>
@@ -13,14 +13,14 @@
         <!-- Esta "directiva" es un forEach (Por cada cerveza) -->
         <!-- Defino a cada elemento (beer) de la lista (beers) -->
         @for (beer of beers; track $index) {
-            <tr [ngClass]="{'clearence' : beer.clearence}"> 
-                <td class="col-2"><img [src]="beer.image" alt="Imagen de la cerveza" class="img-thumbnail"/></td>
+            <tr> 
+                <td class="col-2"><img [src]="beer.image" alt="Img" class="img-thumbnail"/></td>
                 <td class="col-2">{{beer.name}}</td>
-                <td class="col-2">{{beer.type}}</td>
+                <td class="col-2 text-center">{{beer.rating.average | number: '1.0-0'}}</td>
                 <td class="col-2">
                     <!-- Le establezco una "pipe" -> " | " para darle formato. -->
                     <!-- Por defecto, currency trae "$" antes del numero, y le agrega 2 decimales --> 
-                    {{beer.price | currency}} 
+                    {{beer.price}} 
                 </td>
                 <td class="col-1">
                     <!-- Como son condiciones "Opuestas", solo va a mostrar 1 de los 2 "span" -->
