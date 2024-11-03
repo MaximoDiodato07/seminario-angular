@@ -1,7 +1,7 @@
 <table class="table table-responsive table-borderless">
     <thead>
         <tr>
-            <th>Imagen</th>
+            <th class="text-center">Imagen</th>
             <th>Nombre</th>
             <th class="text-center">Puntuacion</th>
             <th>Precio</th>
@@ -14,12 +14,17 @@
         <!-- Defino a cada elemento (beer) de la lista (beers) -->
         @for (beer of beers; track $index) {
             <tr> 
-                <td class="col-2"><img [src]="beer.image" alt="Img" class="img-thumbnail"/></td>
-                <td class="col-2">{{beer.name}}</td>
-                <td class="col-2 text-center">{{beer.rating.average | number: '1.0-0'}}</td>
                 <td class="col-2">
-                    <!-- Le establezco una "pipe" -> " | " para darle formato. -->
-                    <!-- Por defecto, currency trae "$" antes del numero, y le agrega 2 decimales --> 
+                    <div class="imgContainer">
+                        <img [src]="beer.image" alt="Img" class="img-thumbnail"/>
+                    </div>
+                    
+                </td>
+                <td class="col-2">{{beer.name}}</td>
+                <td class="col-2 text-center">
+                    {{beer.rating.average | number: '1.0-0'}} <span class="star"> ★ </span>
+                </td>
+                <td class="col-2">
                     {{beer.price}} 
                 </td>
                 <td class="col-1">
